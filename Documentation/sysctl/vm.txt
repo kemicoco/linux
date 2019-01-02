@@ -32,6 +32,7 @@ Currently, these files are in /proc/sys/vm:
 - drop_caches
 - extfrag_threshold
 - hugetlb_shm_group
+- kvm_madv_free
 - laptop_mode
 - legacy_va_layout
 - lowmem_reserve_ratio
@@ -280,6 +281,20 @@ hugetlb_shm_group contains group id that is allowed to create SysV
 shared memory segment using hugetlb page.
 
 ==============================================================
+
+kvm_madv_free
+
+This interface is used to control guest memory hints at runtime.
+
+With MADV_FREE advice, the kernel marks pages in the given range as lazy
+free, where actual purges are postponed until memory pressure happens.
+    echo 0 > /proc/sys/vm/kvm_madv_free
+
+With MADV_DONTNEED advice, with the given range, the kernel can free
+resources associated with it.
+    echo 1 > /proc/sys/vm/kvm_madv_free
+
+===============================================================
 
 laptop_mode
 
